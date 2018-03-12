@@ -11,6 +11,7 @@ public struct SwipeAction
     public float endTime;
     public float duration;
     public bool longPress;
+    public bool tap;
     public float distance;
     public float longestDistance;
 
@@ -41,6 +42,7 @@ public class SwipeManager : MonoBehaviour
 {
     public System.Action<SwipeAction> onSwipe;
     public System.Action<SwipeAction> onLongPress;
+    public System.Action<SwipeAction> onTap;
 
     [Range(0f, 200f)]
     public float minSwipeLength = 100f;
@@ -90,6 +92,11 @@ public class SwipeManager : MonoBehaviour
                 if (currentSwipeAction.distance < minSwipeLength || currentSwipeAction.longPress) // Didnt swipe enough or this is a long press
                 {
                     currentSwipeAction.direction = SwipeDirection.None; // Invalidate current swipe action
+                    if (!currentSwipeAction.longPress)
+                    {
+                        currentSwipeAction.tap = true;
+                        onTap(currentSwipeAction);
+                    }
                     return;
                 }
 
@@ -107,6 +114,7 @@ public class SwipeManager : MonoBehaviour
         currentSwipeAction.distance = 0f;
         currentSwipeAction.longestDistance = 0f;
         currentSwipeAction.longPress = false;
+        currentSwipeAction.tap = false;
         currentSwipeAction.startPosition = new Vector2(t.position.x, t.position.y);
         currentSwipeAction.startTime = Time.time;
         currentSwipeAction.endPosition = currentSwipeAction.startPosition;

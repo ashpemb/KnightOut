@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     StateMachine<enemystates> fsm;
 
     
-    public int health;
+    public float health;
 
     public string currentState;
 
@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
     {
         if (currentState != "block")
         {
-            TakeDamage(args.player.GetCombo() + 1);
+            TakeDamage((args.player.GetCombo() / 10) + 1);
             args.player.ComboAdd();
         }
         else
@@ -61,7 +61,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int amount)
+    public void TakeDamage(float amount)
     {
         health -= amount;
         if (health <= 0)
@@ -200,6 +200,11 @@ public class Enemy : MonoBehaviour
     IEnumerator attackleft_Enter()
     {
         spriteR.sprite = enemyInfo.EnemySprites[3];
+        // if not blocked
+        if (left)
+        {
+            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "left"));
+        }
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
     }
@@ -211,9 +216,7 @@ public class Enemy : MonoBehaviour
 
     void attackleft_Exit()
     {
-        // if not blocked
-        if (left)
-            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "left"));
+        
     }
     #endregion
 
@@ -221,6 +224,9 @@ public class Enemy : MonoBehaviour
     IEnumerator attackhigh_Enter()
     {
         spriteR.sprite = enemyInfo.EnemySprites[7];
+        // if not blocked
+        if (high)
+            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "high"));
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
     }
@@ -232,9 +238,7 @@ public class Enemy : MonoBehaviour
 
     void attackhigh_Exit()
     {
-        // if not blocked
-        if (high)
-            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "high"));
+        
     }
     #endregion
 
@@ -242,6 +246,9 @@ public class Enemy : MonoBehaviour
     IEnumerator attackright_Enter()
     {
         spriteR.sprite = enemyInfo.EnemySprites[5];
+        // if not blocked
+        if (right)
+            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "right"));
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
     }
@@ -253,9 +260,7 @@ public class Enemy : MonoBehaviour
 
     void attackright_Exit()
     {
-        // if not blocked
-        if (right)
-            EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "right"));
+        
     }
     #endregion
 

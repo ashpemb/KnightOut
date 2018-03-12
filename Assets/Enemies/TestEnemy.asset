@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Name: TestEnemy
   m_EditorClassIdentifier: 
   name: TestEnemyKnight
-  Health: 100
+  Health: 500
   AttackLeftChance: 2
   AttackRightChance: 2
   AttackHighChance: 2

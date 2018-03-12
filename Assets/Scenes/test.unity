@@ -957,7 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minSwipeLength: 100
-  longPressDuration: 0.1
+  longPressDuration: 0.5
 --- !u!114 &2030229719
 MonoBehaviour:
   m_ObjectHideFlags: 0

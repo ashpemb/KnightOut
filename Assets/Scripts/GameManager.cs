@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class GameManager : MonoSingleton<GameManager> {
 
     public GameLevel m_CurrentLevel;
+    public EnemyInfo m_SelectedLevel;
+    public GameObject prepScreen;
 
     private void Update()
     {
@@ -24,9 +26,16 @@ public class GameManager : MonoSingleton<GameManager> {
         
     }
     public void CreateLevel(Scene scene, LoadSceneMode mode)
-    {   
+    {
         if (scene.name == "test")
-        m_CurrentLevel.initLevel();
+        {
+            m_CurrentLevel.initLevel();
+        }
+        else if (scene.name == "LevelSelect")
+        {
+            prepScreen = GameObject.Find("Canvas-PrepScreen");
+            prepScreen.SetActive(false);
+        }
     }
 
     void OnEnable()

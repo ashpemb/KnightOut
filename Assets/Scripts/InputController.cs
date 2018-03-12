@@ -15,6 +15,7 @@ public class InputController : MonoBehaviour
         SwipeManager swipeManager = GetComponent<SwipeManager>();
         swipeManager.onSwipe += HandleSwipe;
         swipeManager.onLongPress += HandleLongPress;
+        swipeManager.onTap += HandleTap;
     }
 
     void HandleSwipe(SwipeAction swipeAction)
@@ -48,6 +49,17 @@ public class InputController : MonoBehaviour
 
     void HandleLongPress(SwipeAction swipeAction)
     {
+        //if (player == null)
+        //{
+        //    player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        //}
+        //EventManager.PlayerTap(player.gameObject, new PlayerEventArgs(player));
+
+        Debug.LogFormat("HandleLongPress: {0}", swipeAction);
+    }
+
+    void HandleTap(SwipeAction swipeAction)
+    {
         if (player == null)
         {
             player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -56,6 +68,4 @@ public class InputController : MonoBehaviour
 
         Debug.LogFormat("HandleLongPress: {0}", swipeAction);
     }
-
-    
 }
