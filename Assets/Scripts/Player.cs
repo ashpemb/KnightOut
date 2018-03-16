@@ -24,6 +24,7 @@ public class Player : MonoBehaviour {
     public void TakeDamage(int amount)
     {
         health -= amount;
+        currentState = BLOCKSTATES.NOBLOCK;
         if (health <= 0)
         {
             EventManager.E_EnemyAttack -= PlayerTakeHit;
@@ -52,24 +53,25 @@ public class Player : MonoBehaviour {
         {
             args.enemy.left = false;
             ComboAdd();
-
+            currentState = BLOCKSTATES.NOBLOCK;
         }
         else if (currentState == BLOCKSTATES.BLOCKRIGHT && args.enemy.right == true)
         {
             args.enemy.right = false;
             ComboAdd();
-
+            currentState = BLOCKSTATES.NOBLOCK;
         }
         else if (currentState == BLOCKSTATES.BLOCKHIGH && args.enemy.high == true)
         {
             args.enemy.high = false;
             ComboAdd();
-
+            currentState = BLOCKSTATES.NOBLOCK;
         }
         else
         {
             TakeDamage(args.enemy.enemyInfo.AttackValue);
             ResetCombo();
+            currentState = BLOCKSTATES.NOBLOCK;
         }
     }
 }

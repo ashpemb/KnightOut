@@ -76,5 +76,6 @@ public class GameManager : MonoSingleton<GameManager> {
     {
         m_CurrentLevel.levelLoaded = false;
         m_CurrentLevel = null;
+        m_SelectedLevel = null;
     }
 }

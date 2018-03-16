@@ -50,10 +50,12 @@ public class Enemy : MonoBehaviour
 
     public void TakeHit(GameObject player, PlayerEventArgs args)
     {
+        args.player.currentState = BLOCKSTATES.NOBLOCK;
         if (currentState != "block")
         {
             TakeDamage((args.player.GetCombo() / 10) + 1);
             args.player.ComboAdd();
+            
         }
         else
         {
@@ -204,6 +206,7 @@ public class Enemy : MonoBehaviour
         if (left)
         {
             EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "left"));
+            left = false;
         }
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
@@ -226,7 +229,10 @@ public class Enemy : MonoBehaviour
         spriteR.sprite = enemyInfo.EnemySprites[7];
         // if not blocked
         if (high)
+        {
             EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "high"));
+            high = false;
+        }
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
     }
@@ -248,7 +254,10 @@ public class Enemy : MonoBehaviour
         spriteR.sprite = enemyInfo.EnemySprites[5];
         // if not blocked
         if (right)
+        {
             EventManager.EnemyAttacking(this.gameObject, new EnemyEventArgs(this, "right"));
+            right = false;
+        }
         yield return new WaitForSeconds(1);
         fsm.ChangeState(enemystates.cooldown, StateTransition.Safe);
     }
