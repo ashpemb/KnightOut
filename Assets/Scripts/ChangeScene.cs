@@ -22,13 +22,17 @@ public class ChangeScene : MonoBehaviour{
 
     public void LoadLevel()
     {
+        EnergySystem.instance.currentEnergy -= GameManager.instance.m_SelectedLevel.StaminaCost;
         GameManager.instance.LoadLevel(GameManager.instance.m_SelectedLevel);
     }
 
     public void LevelSelect(EnemyInfo enemyInfo)
     {
-        GameManager.instance.m_SelectedLevel = enemyInfo;
-        GameManager.instance.prepScreen.SetActive(true);
+        if (EnergySystem.instance.currentEnergy >= enemyInfo.StaminaCost)
+        {
+            GameManager.instance.m_SelectedLevel = enemyInfo;
+            GameManager.instance.prepScreen.SetActive(true);
+        }
     }
 
     public void ClearSelection()

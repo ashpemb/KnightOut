@@ -18,6 +18,7 @@ MonoBehaviour:
   AttackHighChance: 0.6
   BlockChance: 0.3
   AttackValue: 15
+  StaminaCost: 4
   EnemySprites:
   - {fileID: 21300000, guid: 0ccb2cf8031acda43a3d962e89c2fb0b, type: 3}
   - {fileID: 21300002, guid: 0ccb2cf8031acda43a3d962e89c2fb0b, type: 3}

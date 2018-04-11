@@ -9,6 +9,7 @@ public class GameManager : MonoSingleton<GameManager> {
     public GameLevel m_CurrentLevel;
     public EnemyInfo m_SelectedLevel;
     public GameObject prepScreen;
+    public GameObject shopScreen;
 
     private void Update()
     {
@@ -35,6 +36,8 @@ public class GameManager : MonoSingleton<GameManager> {
         {
             prepScreen = GameObject.Find("Canvas-PrepScreen");
             prepScreen.SetActive(false);
+            shopScreen = GameObject.Find("Canvas-Store");
+            shopScreen.SetActive(false);
         }
     }
 

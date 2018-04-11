@@ -9,6 +9,7 @@ public class EnemyInfo : ScriptableObject {
     public int Health;
     public float AttackLeftChance, AttackRightChance, AttackHighChance,BlockChance;
     public int AttackValue;
+    public int StaminaCost;
     public Sprite[] EnemySprites; //Must be in same order as test
     public Sprite BackgroundSprite;
     
